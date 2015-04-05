@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-14 03:50+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: forms.py:6
+msgid "Your answer"
+msgstr "Votre reponse"
+
+#: forms.py:10 templates/forum_view_thread.html:42
+msgid "Comment"
+msgstr "Commenter"
+
+#: forms.py:14
+msgid "Title"
+msgstr "Titre"
+
+#: forms.py:15
+msgid "Body"
+msgstr "Message"
+
+#: templates/forum.html:30 templates/forum_category.html:25
+msgid "No subcategories available"
+msgstr "Aucune sous-categories disponnible"
+
+#: templates/forum.html:38
+#, fuzzy
+#| msgid "No subcategories available"
+msgid "No categories available"
+msgstr "Aucune sous-categories disponnible"
+
+#: templates/forum_category.html:18
+msgid "Subcategories in"
+msgstr "Sous-categories dans"
+
+#: templates/forum_category.html:29 templates/forum_subcategory.html:21
+msgid "Threads in"
+msgstr "Threads dans"
+
+#: templates/forum_category.html:36 templates/forum_subcategory.html:28
+msgid "No threads available"
+msgstr "Pas de threads disponnible"
+
+#: templates/forum_category.html:40 templates/forum_create_thread.html:23
+#: templates/forum_subcategory.html:32
+msgid "New Thread"
+msgstr "Nouveau thread"
+
+#: templates/forum_create_thread.html:34
+msgid "Create Thread"
+msgstr "Creer thread"
+
+#: templates/forum_view_thread.html:65
+msgid "Answer"
+msgstr "Reponse"
+
+#: views.py:119
+msgid "Answer successfully created"
+msgstr "Reponse cree avec succes"
+
+#: views.py:121
+msgid "Invalid answer"
+msgstr "Mauvaise reponse"
+
+#: views.py:153
+msgid "Comment successfully added"
+msgstr "Commentaire ajoute avec succes"
+
+#: views.py:155
+msgid "Invalid comment"
+msgstr "Commentaire invalide"
+
+#: views.py:192
+msgid "Thread successfully created"
+msgstr "Thread cree avec succes"
+
+#: views.py:198
+msgid "Could not create thread"
+msgstr "Impossible de creer le thread"

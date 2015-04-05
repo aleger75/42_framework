@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'forum_view' %}">Forum</a>
+    </li>
+    <li class="active">{{ category.title }}</li>
+  </ol>
+
+  <h2>{% trans 'Subcategories in' %} {{ category.title }}</h2>
+  <div class="list-group">
+    {% if subcategories %}
+      {% for sub_c in subcategories %}
+        <a class="list-group-item" href="{% url 'forum_view_subcategory' c_pk=category.pk sc_pk=sub_c.pk %}">{{ sub_c.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a class="list-group-item disabled" href="#">{% trans 'No subcategories available' %}</a>
+    {% endif %}
+  </div>
+
+  <h2>{% trans 'Threads in' %} {{ category.title }}</h2>
+  <div class="list-group">
+    {% if threads %}
+      {% for thread in threads %}
+        <a class="list-group-item" href="{% url 'forum_view_category_thread' c_pk=category.pk t_pk=thread.pk %}">{{ thread.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a class="list-group-item disabled" href="#">{% trans 'No threads available' %}</a>
+    {% endif %}
+  </div>
+
+  <a class="btn btn-primary" href="{% url 'forum_new_category_thread' c_pk=category.pk %}">{% trans 'New Thread' %}</a>
+
+{% endblock %}

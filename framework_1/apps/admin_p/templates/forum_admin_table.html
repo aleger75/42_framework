@@ -1,0 +1,37 @@
+{% load bootstrap3 %}
+{% load admin_extra %}
+{% load i18n %}
+
+<table class="table table-hover table-bordered">
+
+  <thead>
+    <tr>
+      <th data-field="title">{% trans 'Title' %}</th>
+      {% if not is_sc|is_false %}
+        <th data-field="parent_category">{% trans 'Parent category' %}</th>
+      {% endif %}
+      <th data-field="action">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for object in object_list %}
+      <tr>
+        <td>{{ object.title }}</td>
+        {% if not is_sc|is_false %}
+          <td>{{ object.parent_category.title }}</td>
+        {% endif %}
+        <td>
+          {% if is_sc|is_false %}
+            <a href="{% url 'forum_update_category' pk=object.pk %}">{% bootstrap_icon "pencil" %}</a>
+            <a href="{% url 'forum_delete_category' pk=object.pk %}">{% bootstrap_icon "log-in" %}</a>
+          {% else %}
+            <a href="{% url 'forum_update_subcategory' pk=object.pk %}">{% bootstrap_icon "pencil" %}</a>
+            <a href="{% url 'forum_delete_subcategory' pk=object.pk %}">{% bootstrap_icon "log-in" %}</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
+</table>

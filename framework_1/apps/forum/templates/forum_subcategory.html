@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'forum_view' %}">Forum</a>
+    </li>
+    <li>
+      <a href="{% url 'forum_view_category' pk=category.pk %}">{{ category.title }}</a>
+    </li>
+    <li class="active">{{ subcategory.title }}</li>
+  </ol>
+
+  <h2>{% trans 'Threads in' %} {{ subcategory.title }}</h2>
+  <div class="list-group">
+    {% if threads %}
+      {% for thread in threads %}
+        <a class="list-group-item" href="{% url 'forum_view_subcategory_thread' c_pk=category.pk sc_pk=subcategory.pk t_pk=thread.pk %}">{{ thread.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a class="list-group-item disabled" href="#">{% trans 'No threads available' %}</a>
+    {% endif %}
+  </div>
+
+  <a class="btn btn-primary" href="{% url 'forum_new_subcategory_thread' c_pk=category.pk sc_pk=subcategory.pk %}">{% trans 'New Thread' %}</a>
+
+{% endblock %}

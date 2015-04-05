@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load admin_extra %}
+{% load i18n %}
+
+{% block content %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'admin_view' %}">Admin</a>
+    </li>
+    <li>
+      <a href="{% url 'forum_admin' %}">Forum</a>
+    </li>
+    <li class="active">{% trans 'Delete category' %} '{{ object }}'</li>
+  </ol>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans 'Are you sure you want to delete' %} "{{ object }}"? {% trans 'This will delete all threads, answers or any subcategories associated.' %}</p>
+    {% buttons %}
+      <button type="submit" class="btn btn-danger">{% bootstrap_icon "remove" %} {% trans 'Delete' %}</button>
+    {% endbuttons %}
+  </form>
+
+{% endblock %}

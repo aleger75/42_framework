@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+  <div class="jumbotron">
+    {% if user.is_authenticated %}
+      <h2>{% trans 'Hello' %}, {{ user.username }}</h2>
+    {% else %}
+      <h2>{% trans 'Hello Anonymous, please sign' %}</h2>
+    {% endif %}
+  </div>
+
+  <div class="form-wrapper">
+    <form method="POST" id="search-form" class="form">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name_search" class="control-label">User to search for</label>
+        <input type="text" id="name_search" required="required" name="login" placeholder="Login" class="form-control" max_length="8">
+      </div>
+      <div class="form-group">
+        <button type="submit" id="search_button" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Search User' %}</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="search-content">
+  </div>
+
+{% endblock %}

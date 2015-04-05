@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'admin_view' %}">Admin</a>
+    </li>
+    <li>
+      <a href="{% url 'user_view' %}">{% trans 'Users' %}</a>
+    </li>
+    <li class="active">{% trans 'Create User' %}</li>
+  </ol>
+
+  <div class="form-wrapper">
+    <form method="post" action="{% url "user_create" %}" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Create User' %}</button>
+      {% endbuttons %}
+    </form>
+  </div>
+
+{% endblock %}

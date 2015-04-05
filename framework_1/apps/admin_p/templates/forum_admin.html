@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'admin_view' %}">Admin</a>
+    </li>
+    <li class="active">Forum</li>
+  </ol>
+
+  <h2>{% trans 'List of categories:' %}</h2>
+    {% include 'forum_admin_table.html' with object_list=categories is_sc=False %}
+  <a class="btn btn-primary" href="{% url 'forum_add_category' %}">{% trans 'New category' %}</a>
+
+  <h2>{% trans 'List of subcategories:' %}</h2>
+    {% include 'forum_admin_table.html' with object_list=subcategories is_sc=True %}
+  <a class="btn btn-primary" href="{% url 'forum_add_subcategory' %}">{% trans 'New Subcategory' %}</a>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'admin_view' %}">Admin</a>
+    </li>
+    <li>
+      <a href="{% url 'user_view' %}">{% trans 'Users' %}</a>
+    </li>
+    <li class="active">{% trans 'Delete' %} '{{ object }}'</li>
+  </ol>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans 'Are you sure you want to delete' %} "{{ object }}"?</p>
+      {% buttons %}
+        <button type="submit" class="btn btn-danger">{% bootstrap_icon "remove" %} {% trans 'Delete' %}</button>
+      {% endbuttons %}
+  </form>
+
+{% endblock %}

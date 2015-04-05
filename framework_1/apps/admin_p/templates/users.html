@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="/admin_p/">Admin</a>
+    </li>
+    <li class="active">{% trans 'Users' %}</li>
+  </ol>
+
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th data-field="id">Id</th>
+      <th data-field="username">{% trans 'Username' %}</th>
+      <th data-field="email">Email</th>
+      <th data-field="first_name">{% trans 'First Name' %}</th>
+      <th data-field="last_name">{% trans 'Last Name' %}</th>
+      <th data-field="staff_status">{% trans 'Staff status' %}</th>
+      <th data-field="action">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+
+      <tr>
+        <td>{{ user.pk }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.first_name }} </td>
+        <td>{{ user.last_name }}</td>
+        {% if user.is_staff %}
+          <td>{% bootstrap_icon "ok" %}</td>
+        {% else %}
+          <td>{% bootstrap_icon "remove" %}</td>
+        {% endif %}
+        <td>
+          <a href="{% url "user_update" pk=user.pk %}">{% bootstrap_icon "pencil" %}</a>
+          <a href="{% url "user_delete" pk=user.pk %}">{% bootstrap_icon "log-in" %}</a>
+        </td>
+      </tr>
+
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <a class="btn btn-primary" href="{% url 'user_create' %}">{% trans 'Create User' %}</a>
+
+{% endblock %}

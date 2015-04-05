@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load admin_extra %}
+{% load i18n %}
+
+{% block content %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'admin_view' %}">Admin</a>
+    </li>
+    <li>
+      <a href="{% url 'forum_admin' %}">Forum</a>
+    </li>
+    <li class="active">{% trans 'Add category' %}</li>
+  </ol>
+
+  {% if is_sc|is_false %}
+  <form class="form" method="post" action="{% url 'forum_add_category' %}">
+  {% else %}
+  <form class="form" method="post" action="{% url 'forum_add_subcategory' %}">
+  {% endif %}
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Create Category' %}</button>
+    {% endbuttons %}
+  </form>
+
+{% endblock %}

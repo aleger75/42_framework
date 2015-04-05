@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li class="active">Admin</li>
+  </ol>
+
+  <div class="panel panel-default">
+
+    <div class="list-group">
+      <a class="list-group-item" href="{% url 'user_view' %}">{% trans 'Users' %}</a>
+      <a class="list-group-item" href="{% url 'tickets_view' %}">{% trans 'Tickets' %}</a>
+      <a class="list-group-item" href="{% url 'forum_admin' %}">{% trans 'Forum' %}</a>
+      <a class="list-group-item" href="{% url 'log_as' %}">Log as</a>
+    </div>
+
+  </div>
+
+  {% if logs %}
+    <div class="table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th data-field="username">{% trans 'Username' %}</td>
+            <th data-field="action">Action</td>
+            <th data-field="date">Date</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          <tr>
+            <td>{{ log.user }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+{% endblock %}

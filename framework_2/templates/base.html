@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    {% load staticfiles %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% load i18n %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+          $(".alert").delay(2000).fadeOut(300);
+
+          function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+                }
+              }
+            }
+            return cookieValue;
+          }
+          var csrftoken = getCookie('csrftoken');
+
+          $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+          });
+
+          $("#search-form").on('submit', function(event) {
+            event.preventDefault();
+            if (/^([a-zA-Z\-])+$/.test($("#name_search").val())) {
+              $.ajax({
+                url: '/',
+                type: 'POST',
+                data: {
+                  login: $("#name_search").val()
+                },
+                error: function() {
+                  $("#search-content").html('<p>No results found.</p>');
+                },
+                success: function(data) {
+                  if (data === 'None')
+                    $("#search-content").html('<p>No results found.</p>');
+                  else {
+                    var content = '<h4>' + data['full_name'] + '<h4>'
+                                    + '<p>' + data['uid'] + '</p>'
+                                    + '<p>' + data['mobile'] + '</p>'
+                                    + '<p>' + data['alias'] + '</p>';
+                    $("#search-content").html(content);
+                  }
+                }
+              });
+            }
+            else
+              $("#search-content").html('<p>No results found.</p>');
+          });
+
+      })
+    </script>
+    <style>
+      body {
+        padding-top: 70px;
+      }
+
+      textarea {
+        resize: none;
+        height: 200px;
+      }
+
+      .comment {
+        font-size: 16px;
+        color: #909090;
+      }
+    </style>
+    <title>Framework 2</title>
+  </head>
+
+  <body>
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Framework 2</a>
+        </div>
+      <div class="container">
+        <p class="navbar-text navbar-left">
+          <a class="navbar-link" href="/tickets/">Tickets</a>
+        </p>
+        <p class="navbar-text navbar-left">
+          <a class="navbar-link" href="/forum/">Forum</a>
+        </p>
+          {% if user.is_authenticated %}
+            <p class="navbar-text navbar-right">
+              {% if 'impersonate_id' in request.session %}
+              <a class="navbar-link" href="{% url 'stop_log_as' %}">Switch to main account<strong> ({{ user }})</strong></a>
+              {% else %}
+                <a class="navbar-link" href="/logout/">{% trans 'Sign out' %} <strong>({{ user.username }})</strong></a>
+              {% endif %}
+            </p>
+          {% else %}
+            <p class="navbar-text navbar-right">
+              <a class="navbar-link navbar-btn" href="/login/"><strong>{% trans 'Sign in' %}</strong></a>
+            </p>
+          {% endif %}
+
+          {% if user.is_staff %}
+            <p class="navbar-text navbar-left">
+              <a class="navbar-link navbar-btn" href="/admin_p/">Admin</a>
+            </p>
+          {% endif %}
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+  </div>
+  </body>
+
+</html>

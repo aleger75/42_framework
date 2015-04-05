@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'forum_view' %}">Forum</a>
+    </li>
+    <li>
+      <a href="{% url 'forum_view_category' pk=category.pk %}">{{ category.title }}</a>
+    </li>
+    {% if subcategory %}
+      <li>
+        <a href="{% url 'forum_view_subcategory' c_pk=category.pk sc_pk=subcategory.pk %}">{{ subcategory.title }}</a>
+      </li>
+    {% endif %}
+    <li class="active">{{ thread.title }}</li>
+  </ol>
+  <h2>{{ thread.title }}</h2>
+
+  {% for answer in answers %}
+
+    <div class="well well-sm">
+      <blockquote class="blockquote">
+        <p>{{ answer.0.body }}</p>
+        <footer>{{ answer.0.author }}</footer>
+      </blockquote>
+      {% if subcategory %}
+        <form method="post" class="form" action="{% url 'forum_comment_subcategory_thread' c_pk=category.pk sc_pk=subcategory.pk t_pk=thread.pk a_pk=answer.0.pk %}">
+      {% else %}
+        <form method="post" class="form" action="{% url 'forum_comment_category_thread' c_pk=category.pk t_pk=thread.pk a_pk=answer.0.pk %}">
+      {% endif %}
+          {% csrf_token %}
+          {% bootstrap_form comment_form %}
+          {% buttons %}
+            <button type="submit" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Comment' %}</button>
+          {% endbuttons %}
+        </form>
+    </div>
+
+    {% for comment in answer.1 %}
+      <blockquote class="blockquote-reverse">
+        <p class="comment">{{ comment.body }}</p>
+        <footer>{{ comment.author }}</footer>
+      </blockquote>
+      <hr>
+    {% endfor %}
+
+  {% endfor %}
+
+  {% if subcategory %}
+    <form method="post" class="form" action="{% url 'forum_answer_subcategory_thread' c_pk=category.pk sc_pk=subcategory.pk t_pk=thread.pk %}">
+  {% else %}
+    <form method="post" class="form" action="{% url 'forum_answer_category_thread' c_pk=category.pk t_pk=thread.pk %}">
+  {% endif %}
+      {% csrf_token %}
+      {% bootstrap_form answer_form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Answer' %}</button>
+      {% endbuttons %}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-14 00:12+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/tickets.html:15
+msgid "Your tickets"
+msgstr "Vos tickets"
+
+#: templates/tickets.html:20
+msgid "You have no tickets opened"
+msgstr "Vous n'avez pas de tickets ouverts"
+
+#: templates/tickets.html:26
+msgid "Tickets assigned to you"
+msgstr "Tickets qui vous sont assignes"
+
+#: templates/tickets.html:31
+msgid "No tickets assigned to you"
+msgstr "Aucun tickets ne vous sont assignes"
+
+#: templates/tickets.html:35
+msgid "Unassigned tickets"
+msgstr "Tickets sans assignation"
+
+#: templates/tickets.html:40
+msgid "No unassigned tickets"
+msgstr "Aucun tickets non assignes"
+
+#: templates/tickets.html:46
+msgid "New ticket"
+msgstr "Nouveau ticket"
+
+#: templates/tickets_answer.html:20 templates/tickets_answer.html.py:28
+msgid "Author:"
+msgstr "Auteur :"
+
+#: templates/tickets_answer.html:21
+msgid "Type:"
+msgstr "Type :"
+
+#: templates/tickets_answer.html:22
+msgid "Message:"
+msgstr "Message :"
+
+#: templates/tickets_answer.html:29
+msgid "Answer:"
+msgstr ""
+
+#: templates/tickets_answer.html:39
+msgid "Answer"
+msgstr "Reponse :"
+
+#: templates/tickets_answer.html:46
+msgid "Re-open Ticket"
+msgstr "Reouvrir le ticket"
+
+#: templates/tickets_answer.html:55
+msgid "Close Ticket"
+msgstr "Fermer le ticket"
+
+#: templates/tickets_answer.html:61 templates/tickets_assign.html:27
+msgid "Assign Ticket"
+msgstr "Assigner le ticket"
+
+#: templates/tickets_assign.html:20
+msgid "Assign"
+msgstr "Assigner"
+
+#: templates/tickets_create.html:16
+msgid "Create Ticket"
+msgstr "Creer le ticket"
+
+#: templates/tickets_table.html:6
+msgid "Type"
+msgstr "Type"
+
+#: templates/tickets_table.html:7
+msgid "Summary"
+msgstr "Sommaire"
+
+#: templates/tickets_table.html:8
+msgid "Priority"
+msgstr "Priorite"
+
+#: templates/tickets_table.html:9
+msgid "Author"
+msgstr "Auteur"
+
+#: templates/tickets_table.html:10
+msgid "Assigned to"
+msgstr "Assigne a"
+
+#: templates/tickets_table.html:11
+msgid "Status"
+msgstr "Statut"
+
+#: templates/tickets_table.html:12
+msgid "Action"
+msgstr "Action"
+
+#: templates/tickets_table.html:22
+msgid "Critical"
+msgstr "Critique"
+
+#: templates/tickets_table.html:24
+msgid "High"
+msgstr "Haute"
+
+#: templates/tickets_table.html:26
+msgid "Normal"
+msgstr "Normal"
+
+#: templates/tickets_table.html:28
+msgid "Low"
+msgstr "Basse"
+
+#: templates/tickets_table.html:30
+msgid "Very Low"
+msgstr "Tres basse"
+
+#: templates/tickets_table.html:36
+msgid "Not yet assigned"
+msgstr "Pas encore assigne"
+
+#: templates/tickets_table.html:42
+msgid "Opened"
+msgstr "Ouvert"
+
+#: templates/tickets_table.html:44
+msgid "Closed"
+msgstr "Ferme"
+
+#: templates/tickets_table.html:48
+msgid "View"
+msgstr "Voir"
+
+#: views.py:46
+msgid "Ticket successfully created"
+msgstr "Ticket cree avec succes"
+
+#: views.py:49
+msgid "Please enter valid information."
+msgstr "Merci d'entrer des informations valides."
+
+#: views.py:83
+msgid "Invalid answer"
+msgstr "Reponse invalide"
+
+#: views.py:100
+msgid "Ticket re-opened"
+msgstr "Ticket reouvert"
+
+#: views.py:103
+msgid "Could not re-open ticket"
+msgstr "Impossible de reouvrir le ticket"
+
+#: views.py:118
+msgid "Ticket closed"
+msgstr "Ticket ferme"
+
+#: views.py:121
+msgid "Could not close ticket"
+msgstr "Impossible de fermer le ticket"
+
+#: views.py:130
+msgid "Ticket successfully assigned"
+msgstr "Ticket assigne avec succes"

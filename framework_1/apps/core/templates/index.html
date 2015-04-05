@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+  <div class="jumbotron">
+    {% if user.is_authenticated %}
+      <h2>{% trans 'Hello' %}, {{ user.username }}</h2>
+    {% else %}
+      <h2>{% trans 'Hello Anonymous, please sign in or register' %}</h2>
+    {% endif %}
+  </div>
+{% endblock %}

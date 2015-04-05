@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+
+{% block content %}
+
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'tickets_view' %}">Tickets</a>
+    </li>
+    <li>
+      <a href="{% url 'tickets_answer' pk=object.pk %}">{{ object.title|truncatechars:9 }}</a>
+    </li>
+    <li class="active">{% trans 'Assign' %}</li>
+  </ol>
+
+  <form method="post" action="{% url 'tickets_assign' pk=object.pk %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+     <button type="submit" class="btn btn-success">{% bootstrap_icon "ok" %} {% trans 'Assign Ticket' %}</button>
+    {% endbuttons %}
+  </form>
+
+
+{% endblock %}

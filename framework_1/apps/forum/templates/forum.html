@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li class="active">Forum</li>
+  </ol>
+
+  {% if object_list %}
+    {% for t in object_list %}
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <a href="{% url 'forum_view_category' pk=t.0.pk %}">{{ t.0.title }}</a>
+        </div>
+
+        <div class="list-group">
+          {% if t.1 %}
+            {% for sub_c in t.1 %}
+              <a class="list-group-item" href="{% url 'forum_view_subcategory' c_pk=t.0.pk sc_pk=sub_c.pk %}">{{ sub_c.title }}</a>
+            {% endfor %}
+          {% else %}
+            <a class="list-group-item disabled" href="#">{% trans 'No subcategories available' %}</a>
+          {% endif %}
+        </div>
+
+      </div>
+
+    {% endfor %}
+  {% else %}
+    <h2>{% trans 'No categories available' %}</h2>
+  {% endif %}
+
+{% endblock %}

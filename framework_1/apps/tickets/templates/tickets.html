@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li class="active">Tickets</li>
+  </ol>
+
+  <h2>{% trans 'Your tickets' %}</h2>
+  {% if object_list %}
+    {% include 'tickets_table.html' %}
+  {% else %}
+    <strong>{% trans 'You have no tickets opened' %}</strong>
+  {% endif %}
+
+  {% if user.is_staff %}
+
+    <h2>{% trans 'Tickets assigned to you' %}</h2>
+    {% if opened_tickets %}
+      {% include 'tickets_table.html' with object_list=opened_tickets %}
+    {% else %}
+      <strong>{% trans 'No tickets assigned to you' %}</strong>
+    {% endif %}
+
+    <h2>{% trans 'Unassigned tickets' %}</h2>
+    {% if unassigned_tickets %}
+      {% include 'tickets_table.html' with object_list=unassigned_tickets %}
+    {% else %}
+      <strong>{% trans 'No unassigned tickets' %}</strong>
+    {% endif %}
+
+  {% endif %}
+
+  <a class="btn btn-primary" href="{% url 'tickets_create' %}">{% trans 'New ticket' %}</a>
+
+{% endblock %}

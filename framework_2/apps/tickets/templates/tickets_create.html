@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <div class="form-wrapper">
+    <form method="post" action="/tickets/create/" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Create Ticket' %}</button>
+      {% endbuttons %}
+    </form>
+  </div>
+
+{% endblock %}

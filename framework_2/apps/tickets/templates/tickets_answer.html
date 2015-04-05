@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="{% url 'tickets_view' %}">Tickets</a>
+    </li>
+    <li class="active">{{ ticket.title|truncatechars:9 }}</li>
+  </ol>
+
+  <h3>{{ ticket.title }}</h3>
+  <div class="well">
+    <p><strong>{% trans 'Author:' %}</strong> {{ ticket.creator.username }}</p>
+    <p><strong>{% trans 'Type:' %}</strong> {{ ticket.type }}</p>
+    <p><strong>{% trans 'Message:' %}</strong> {{ ticket.body }}</p>
+  </div>
+
+{% if answers %}
+  {% for answer in answers %}
+    <div class="well">
+     <p><strong>{% trans 'Author:' %}</strong> {{ answer.answer_creator.username }}</p>
+     <p><strong>{% trans 'Answer:' %}</strong> {{ answer.answer }}</p>
+    </div>
+  {% endfor %}
+{% endif %}
+
+  {% if form %}
+    <form method="post" action="{% url 'tickets_answer' pk=ticket.pk %}">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">{% bootstrap_icon "ok" %} {% trans 'Answer' %}</button>
+      {% endbuttons %}
+    </form>
+  {% else %}
+    <form method="post" action="{% url 'tickets_open' pk=ticket.pk %}">
+      {% csrf_token %}
+      {% buttons %}
+        <button type="submit" class="btn btn-success">{% bootstrap_icon "ok" %} {% trans 'Re-open Ticket' %}</button>
+      {% endbuttons %}
+    </form>
+  {% endif %}
+
+  {% if ticket.status %}
+    <form method="post" action="{% url 'tickets_close' pk=ticket.pk %}">
+      {% csrf_token %}
+      {% buttons %}
+        <button type="submit" class="btn btn-warning">{% bootstrap_icon "remove" %} {% trans 'Close Ticket' %}</button>
+      {% endbuttons %}
+    </form>
+  {% endif %}
+
+  {% if user.is_staff %}
+    <a href="{% url 'tickets_assign' pk=ticket.pk %}" class="btn btn-primary">{% trans 'Assign Ticket' %}</a>
+  {% endif %}
+
+{% endblock %}

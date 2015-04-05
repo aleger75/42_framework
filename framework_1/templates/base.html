@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    {% load staticfiles %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% load i18n %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $(".alert").delay(2000).fadeOut(300);
+      })
+    </script>
+    <style>
+      body {
+        padding-top: 70px;
+      }
+
+      textarea {
+        resize: none;
+        height: 200px;
+      }
+
+      .comment {
+        font-size: 16px;
+        color: #909090;
+      }
+    </style>
+    <title>Framework 1</title>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+      <div class="navbar-header">
+          <a class="navbar-brand" href="/">Framework 2</a>
+      </div>
+
+    <div class="container">
+
+      <p class="navbar-text navbar-left">
+        <a class="navbar-link" href="/tickets/">Tickets</a>
+      </p>
+
+      <p class="navbar-text navbar-left">
+        <a class="navbar-link" href="/forum/">Forum</a>
+      </p>
+
+        {% if user.is_authenticated %}
+          <p class="navbar-text navbar-right">
+            <a class="navbar-link" href="/logout/">{% trans 'Sign out' %} <strong>({{ user.username }})</strong></a>
+          </p>
+        {% else %}
+          <p class="navbar-text navbar-right">
+            <a class="navbar-link navbar-btn" href="/login/"><strong>{% trans 'Sign in' %}</strong></a>
+              {% trans 'or' %}
+            <a class="navbar-link navbar-btn" href="/register/"><strong>{% trans 'Register' %}</strong></a>
+          </p>
+        {% endif %}
+
+        <form class="navbar-form navbar-right" action="/i18n/setlang/" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.path }}">
+          <select name="language" class="form-control">
+            {% for lang in LANGUAGES %}
+            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+        {% if user.is_staff %}
+          <p class="navbar-text navbar-left">
+            <a class="navbar-link navbar-btn" href="/admin_p/">Admin</a>
+          </p>
+        {% endif %}
+
+      </div>
+  </nav>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+  </body>
+
+</html>

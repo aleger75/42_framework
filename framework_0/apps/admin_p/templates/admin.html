@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <ol class="breadcrumb">
+    <li class="active">Admin</li>
+  </ol>
+
+  <div class="panel panel-default">
+
+    <div class="list-group">
+      <a class="list-group-item" href="{% url 'user_view' %}">{% trans 'Users' %}</a>
+    </div>
+
+  </div>
+
+{% endblock %}

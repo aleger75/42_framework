@@ -1,0 +1,53 @@
+{% load i18n %}
+
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th data-field="type">{% trans 'Type' %}</th>
+    <th data-field="title">{% trans 'Summary' %}</th>
+    <th data-field="priority">{% trans 'Priority' %}</th>
+    <th data-field="author">{% trans 'Author' %}</th>
+    <th data-field="assignation">{% trans 'Assigned to' %}</th>
+    <th data-field="status">{% trans 'Status' %}</th>
+    <th data-field="action">{% trans 'Action' %}</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for ticket in object_list %}
+    <tr>
+      <td>{{ ticket.type }}</td>
+      <td>{{ ticket.title|truncatechars:30 }}</td>
+
+      {% if ticket.priority == 1 %}
+        <td>{% trans 'Critical' %}</td>
+      {% elif ticket.priority == 2 %}
+        <td>{% trans 'High' %}</td>
+      {% elif ticket.priority == 3 %}
+        <td>{% trans 'Normal' %}</td>
+      {% elif ticket.priority == 4 %}
+        <td>{% trans 'Low' %}</td>
+      {% else %}
+        <td>{% trans 'Very Low' %}</td>
+      {% endif %}
+
+      <td>{{ ticket.creator.username }}</td>
+
+      {% if ticket.staff == None %}
+        <td>{% trans 'Not yet assigned' %}</td>
+      {% else %}
+        <td>{{ ticket.staff.username }}</td>
+      {% endif %}
+
+      {% if ticket.status == True %}
+        <td>{% trans 'Opened' %}</td>
+      {% else %}
+        <td>{% trans 'Closed' %}</td>
+      {% endif %}
+
+      <td>
+        <a href="{% url 'tickets_answer' pk=ticket.pk %}">{% trans 'View' %}</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

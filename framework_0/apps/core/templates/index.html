@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+  {% for message in messages %}
+    <div role="alert" class="alert {{ message.tags }} alert-dismissable">{{ message }}</div>
+  {% endfor %}
+
+  <div class="jumbotron">
+    {% if user.is_authenticated %}
+      <h2>{% trans 'Hello' %}, {{ user.username }}</h2>
+    {% else %}
+      <h2>{% trans 'Hello Anonymous, please sign in or register' %}</h2>
+    {% endif %}
+  </div>
+
+  {% if user.is_authenticated %}
+    <div class="form-wrapper">
+	  <form method="post" action="/send/" class="form">
+		{% csrf_token %}
+	    {% bootstrap_form form %}
+	    {% buttons %}
+		  <button type="submit" class="btn btn-primary">{% bootstrap_icon "send" %} Submit</button>
+	    {% endbuttons %}
+	  </form>
+	</div>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+body {
+  padding-top: 70px;
+}
+
+textarea {
+  resize: none;
+  height: 200px;
+}
+
+.comment {
+    font-size: 16px;
+    color: #909090;
+}

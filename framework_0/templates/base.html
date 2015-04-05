@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    {% load bootstrap3 %}
+    {% load staticfiles %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "js/main.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+    <title>Framework</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="/">Framework 1</a>
+      </div>
+      <div class="header container">
+        {% if user.is_authenticated %}
+          <p class="navbar-text navbar-right">
+            <a class="navbar-link" href="/logout/">Sign out <strong>({{ user.username }})</strong></a>
+          </p>
+        {% else %}
+          <p class="navbar-text">
+            <a class="navbar-link navbar-btn" href="/login/"><strong>Sign in</strong></a>
+              or
+            <a class="navbar-link navbar-btn" href="/register/"><strong>Register</strong></a>
+          </p>
+        {% endif %}
+
+        {% if user.is_staff %}
+          <p class="navbar-text">
+            <a class="navbar-link navbar-btn" href="/admin_p/">Admin</a>
+          </p>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+
+</html>
